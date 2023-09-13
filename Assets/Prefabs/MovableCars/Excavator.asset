@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f506dc8708a48e0979b5d55cb3155f0, type: 3}
+  m_Name: Excavator
+  m_EditorClassIdentifier: 
+  CarPrefab: {fileID: 1696581656664081772, guid: 2b45c131f71052e48bccc24c6cdc3cfa,
+    type: 3}
+  CarType: 0
+  PointerPrefab: {fileID: 3300768562975171475, guid: 59fd0b4c4173cbd45b621093a5a8845f,
+    type: 3}
+  SwipeStrength: 13
+  MaxSwipeMagnitude: 200

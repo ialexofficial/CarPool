@@ -1,0 +1,18 @@
+{
+  "name": "CarPool.Tools",
+  "rootNamespace": "CarPool",
+  "references": [
+    "GUID:f9ba9c4f36101ef45a9c63f4abcacc1b",
+    "GUID:6216dd614b753984b80ce8b43c54dd56",
+    "GUID:15a41d79aba30a34684b83704053ef67"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -1,0 +1,18 @@
+{
+    "name": "CarPool.Entities",
+    "rootNamespace": "CarPool",
+    "references": [
+        "GUID:6216dd614b753984b80ce8b43c54dd56",
+        "GUID:15a41d79aba30a34684b83704053ef67",
+        "GUID:911e9fdcf2c4aa647998ae3a72ce8163"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

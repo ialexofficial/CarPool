@@ -1,0 +1,25 @@
+{
+    "name": "CarPool.States",
+    "rootNamespace": "CarPool",
+    "references": [
+        "GUID:f9ba9c4f36101ef45a9c63f4abcacc1b",
+        "GUID:15a41d79aba30a34684b83704053ef67",
+        "GUID:a44a2a03f53450f4eafe3a6c6bef5976",
+        "GUID:dddfdaa0ed1c4514a8e7af882cd14b8a",
+        "GUID:75d9021ae7bc8d44a8fcd6946a25ab5d",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:89e5f47cfee48484988d133cb401986a",
+        "GUID:9ffac2e381bc35a41ad892b88ee72b38",
+        "GUID:6216dd614b753984b80ce8b43c54dd56",
+        "GUID:911e9fdcf2c4aa647998ae3a72ce8163"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
