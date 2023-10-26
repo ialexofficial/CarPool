@@ -1,11 +1,15 @@
 using System.Linq;
 using CarPool.Level;
+using CarPool.States.Tutorial;
+using CarPool.States.Tutorial.Steps;
 using CarPool.States;
 using CarPool.Tools;
+using CarPool.UI.Views;
 using Client;
 using Ji2.CommonCore;
 using Ji2.CommonCore.SaveDataContainer;
 using Ji2.Context;
+using Ji2.Presenters.Tutorial;
 using Ji2Core.Core;
 using Ji2Core.Core.ScreenNavigation;
 using Ji2Core.Core.States;
@@ -15,13 +19,14 @@ using UnityEngine;
 
 namespace CarPool
 {
-    class Bootstrap : BootstrapBase
+    sealed class Bootstrap : BootstrapBase
     {
         [SerializeField] private UpdateService updateService;
         [SerializeField] private DragInput dragInput;
         [SerializeField] private ScreenNavigator screenNavigator;
         [SerializeField] private LevelDatabase levelDatabase;
         [SerializeField] private Config config;
+        [SerializeField] private TutorialPointer tutorialPointer;
 
         private readonly Context _context = Context.GetOrCreateInstance();
         
@@ -41,9 +46,11 @@ namespace CarPool
             CameraProvider cameraProvider = InstallCameraProvider();
             InstallSceneLoader();
             InstallTimeScaler();
+            InstallTrackingCamera(cameraProvider);
             InstallPositionedDragInput(dragInput, cameraProvider);
             
             StateMachine stateMachine = InstallStateMachine();
+            InstallTutorialService(saveDataContainer, stateMachine);
             
             stateMachine.Load();
             stateMachine.Enter<InitialState>();
@@ -81,6 +88,11 @@ namespace CarPool
             _context.Register(new TimeScaler());
         }
 
+        private void InstallTrackingCamera(CameraProvider cameraProvider)
+        {
+            _context.Register(new TrackingCamera(cameraProvider, updateService));
+        }
+
         private CameraProvider InstallCameraProvider()
         {
             CameraProvider cameraProvider = new CameraProvider();
@@ -100,6 +112,21 @@ namespace CarPool
             
             _context.Register(stateMachine);
             return stateMachine;
+        }
+
+        private void InstallTutorialService(ISaveDataContainer saveDataContainer, StateMachine stateMachine)
+        {
+            var tutorialStepFactory = new TutorialStepFactory(_context,
+                stateMachine,
+                tutorialPointer
+            );
+            
+            _context.Register(new TutorialService(saveDataContainer, new []
+                {
+                    tutorialStepFactory.Create<InitialTutorialStep>(),
+                    tutorialStepFactory.Create<MultipleCarTutorialStep>()
+                }
+            ));
         }
 
         private void InstallMoneyContainer(ISaveDataContainer saveDataContainer)

@@ -50,6 +50,7 @@ namespace CarPool.States
 
             LevelPresenter levelPresenter = new LevelPresenter(
                 _context.GetService<Config>(),
+                _context.GetService<TrackingCamera>(),
                 levelData,
                 _levelProgressService,
                 _context.GetService<SpawnPoint[]>(),

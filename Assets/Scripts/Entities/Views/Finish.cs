@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace CarPool.Entities.Views
 {
@@ -13,20 +12,17 @@ namespace CarPool.Entities.Views
 
         public bool IsEnabled { get; set; } = true;
 
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (!IsEnabled)
                 return;
             
             Rigidbody rigidbody = other.attachedRigidbody;
+            IsEnabled = false;
+            rigidbody.velocity = Vector3.zero;
 
-            if (rigidbody.velocity.magnitude <= finishSettings.FinishVelocity)
-            {
-                IsEnabled = false;
-                
-                finishVFX.Play();
-                OnFinish?.Invoke();
-            }
+            finishVFX.Play();
+            OnFinish?.Invoke();
         }
     }
 }

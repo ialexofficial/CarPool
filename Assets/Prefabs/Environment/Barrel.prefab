@@ -225,6 +225,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2449689925171085408, guid: 60a19cf29213862409932bda9871fa9a,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2752537662307969064, guid: 60a19cf29213862409932bda9871fa9a,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8473129081070326933, guid: 60a19cf29213862409932bda9871fa9a,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60a19cf29213862409932bda9871fa9a, type: 3}
 --- !u!1 &3017047775729904542 stripped

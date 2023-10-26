@@ -17,5 +17,8 @@ MonoBehaviour:
   CarType: 0
   PointerPrefab: {fileID: 3300768562975171475, guid: 59fd0b4c4173cbd45b621093a5a8845f,
     type: 3}
-  SwipeStrength: 13
+  SwipeStrength: 0.1
   MaxSwipeMagnitude: 200
+  borderLayer:
+    serializedVersion: 2
+    m_Bits: 2048

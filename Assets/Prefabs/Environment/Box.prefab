@@ -148,6 +148,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6671327518467801776, guid: 20fb5653f8546494c9952bd4821f0692,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -5613393389866954000, guid: 20fb5653f8546494c9952bd4821f0692,
         type: 3}
       propertyPath: m_Layer
@@ -157,6 +162,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -4333069057998058993, guid: 20fb5653f8546494c9952bd4821f0692,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3576505123785479191, guid: 20fb5653f8546494c9952bd4821f0692,
         type: 3}
@@ -183,10 +193,30 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1701301799562459933, guid: 20fb5653f8546494c9952bd4821f0692,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581480194220964890, guid: 20fb5653f8546494c9952bd4821f0692,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6515995148684697949, guid: 20fb5653f8546494c9952bd4821f0692,
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754044739999689364, guid: 20fb5653f8546494c9952bd4821f0692,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843381367442024821, guid: 20fb5653f8546494c9952bd4821f0692,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20fb5653f8546494c9952bd4821f0692, type: 3}

@@ -8,7 +8,6 @@ using CarPool.Tools;
 using Client;
 using Ji2.CommonCore;
 using Ji2Core.Core.UserInput;
-using UnityEngine;
 
 namespace CarPool.Level.Models
 {
@@ -22,7 +21,7 @@ namespace CarPool.Level.Models
         private readonly PositionedDragInput _positionedDragInput;
         private readonly DragInput _dragInput;
         private readonly SpawnPoint[] _spawnPoints;
-        private readonly List<MovableCarModel> _movableCars = new();
+        private readonly List<MovableCarModel> _movableCarModels = new();
 
         private bool _isLevelEnded;
         private int _leftSwipeCount;
@@ -32,9 +31,13 @@ namespace CarPool.Level.Models
         public event Action OnLose;
         public event Action<int> OnSwipeCountChange;
 
+        public MovableCar PlayerCar { get; private set; }
+        public List<MovableCar> MovableCars { get; } = new();
+
         public LevelModel(
             Config config,
             LevelData levelData,
+            TrackingCamera trackingCamera,
             LevelsLoopProgress levelProgress,
             SpawnPoint[] spawnPoints,
             DragInput dragInput,
@@ -45,6 +48,7 @@ namespace CarPool.Level.Models
         )
         {
             carFactory = new CarFactory(
+                trackingCamera,
                 updateService,
                 positionedDragInput
             );
@@ -66,16 +70,17 @@ namespace CarPool.Level.Models
                 switch (spawnPoint.Settings.CarType)
                 {
                     case CarType.MovableCar:
-                        var movableCar = carFactory.Build<MovableCarModel>(spawnPoint);
-                        movableCar.OnForceAdd += OnCarForceAdded;
-                        _movableCars.Add(movableCar);
+                        var (movableCar, movableCarModel) = carFactory.Build<MovableCarModel>(spawnPoint);
+                        movableCarModel.OnSwipeApply += OnSwipeApplied;
+                        _movableCarModels.Add(movableCarModel);
+                        MovableCars.Add(movableCar);
                         break;
                     case CarType.PlayerCar:
-                        _playerCar = carFactory.Build<PlayerCarModel>(spawnPoint);
+                        (PlayerCar, _playerCar) = carFactory.Build<PlayerCarModel>(spawnPoint);
                         _playerCar.OnCarStateChange += (state) =>
                             CheckLoseRequirements();
                         _playerCar.OnDestroy += () => CheckLoseRequirements(true);
-                        _playerCar.OnForceAdd += OnCarForceAdded;
+                        _playerCar.OnSwipeApply += OnSwipeApplied;
                         break;
                 }
             }
@@ -93,7 +98,7 @@ namespace CarPool.Level.Models
             _levelProgress.Reset();
         }
 
-        private void OnCarForceAdded(Vector3 force)
+        private void OnSwipeApplied()
         {
             _leftSwipeCount -= 1;
             OnSwipeCountChange?.Invoke(_leftSwipeCount);
@@ -130,7 +135,7 @@ namespace CarPool.Level.Models
             _finish.OnFinish -= OnFinished;
             
             carFactory.Clear(_playerCar);
-            foreach (var car in _movableCars)
+            foreach (var car in _movableCarModels)
             {
                 carFactory.Clear(car);
             }

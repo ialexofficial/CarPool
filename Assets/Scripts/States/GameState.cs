@@ -14,8 +14,9 @@ namespace CarPool.States
         private readonly StateMachine _stateMachine;
         private readonly ScreenNavigator _screenNavigator;
         private readonly TimeScaler _timeScaler;
-        private GamePayload _payload;
 
+        public GamePayload Payload { get; private set; }
+        
         public GameState(Context context, StateMachine stateMachine)
         {
             _context = context;
@@ -27,10 +28,10 @@ namespace CarPool.States
         
         public async UniTask Enter(GamePayload payload)
         {
-            _payload = payload;
+            Payload = payload;
 
-            _payload.LevelPresenter.OnLevelEnd += OnLevelEnded;
-            _payload.LevelPresenter.BuildView(
+            Payload.LevelPresenter.OnLevelLoad += OnLevelEnded;
+            Payload.LevelPresenter.BuildView(
                 await _screenNavigator.PushScreen<GameScreen>(),
                 _timeScaler
             );
@@ -38,7 +39,7 @@ namespace CarPool.States
 
         public async UniTask Exit()
         {
-            _payload.LevelPresenter.Clear();
+            Payload.LevelPresenter.Clear();
             _timeScaler.ResetScale();
         }
 

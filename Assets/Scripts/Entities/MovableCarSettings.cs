@@ -12,6 +12,7 @@ namespace CarPool.Entities
         public Pointer PointerPrefab;
         public float SwipeStrength;
         public float MaxSwipeMagnitude;
+        public LayerMask borderLayer;
     }
     
     public enum CarType

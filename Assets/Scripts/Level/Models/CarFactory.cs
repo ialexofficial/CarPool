@@ -16,17 +16,20 @@ namespace CarPool.Level.Models
     {
         private readonly PositionedDragInput _positionedDragInput;
         private readonly UpdateService _updateService;
+        private readonly TrackingCamera _trackingCamera;
 
         public CarFactory(
+            TrackingCamera trackingCamera,
             UpdateService updateService,
             PositionedDragInput positionedDragInput
         )
         {
+            _trackingCamera = trackingCamera;
             _updateService = updateService;
             _positionedDragInput = positionedDragInput;
         }
 
-        public T Build<T>(SpawnPoint spawnPoint) where T: MovableCarModel
+        public (MovableCar, T) Build<T>(SpawnPoint spawnPoint) where T: MovableCarModel
         {
             var carSettings = spawnPoint.Settings;
             
@@ -36,11 +39,16 @@ namespace CarPool.Level.Models
             _positionedDragInput.Subscribe(carModel, car.transform);
             _updateService.Add(carModel);
 
-            return carModel;
+            return (car, carModel);
         }
 
         public void Clear(MovableCarModel carModel)
         {
+            if (carModel is PlayerCarModel)
+            {
+                _trackingCamera.Clear();
+            }
+            
             _positionedDragInput.Unsubscribe(carModel);
             _updateService.Remove(carModel);
         }
@@ -88,6 +96,8 @@ namespace CarPool.Level.Models
                 PlayerCarModel carModel = new PlayerCarModel(carSettings, pointerModel);
                 PlayerCarVM carVM = new PlayerCarVM(carModel);
                 (car as PlayerCar).Construct(carVM);
+
+                _trackingCamera.SetTrackingObject(car.transform, TrackSettings.MoveWithTracking);
 
                 return (T)(MovableCarModel) carModel;
             }

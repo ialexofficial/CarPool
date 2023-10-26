@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CarPool.Entities.Views;
 using CarPool.Entities.Views.Cars;
 using CarPool.Level.Models;
@@ -25,15 +26,21 @@ namespace CarPool.Level.Presenters
         private readonly StaticCar[] _staticCars;
         private readonly PositionedDragInput _positionedDragInput;
         private readonly SpawnPoint[] _spawnPoints;
+        private readonly TrackingCamera _trackingCamera;
 
         private LevelModel _levelModel;
         private MoneyModel _moneyModel;
         private LevelView _levelView;
 
         public event Action OnLevelEnd;
+        public event Action OnLevelLoad;
+        
+        public MovableCar PlayerCar => _levelModel.PlayerCar;
+        public List<MovableCar> MovableCars => _levelModel.MovableCars;
 
         public LevelPresenter(
             Config config,
+            TrackingCamera trackingCamera,
             LevelData levelData,
             LevelsLoopProgress levelProgress,
             SpawnPoint[] spawnPoints,
@@ -47,6 +54,7 @@ namespace CarPool.Level.Presenters
         )
         {
             _config = config;
+            _trackingCamera = trackingCamera;
             _levelData = levelData;
             _spawnPoints = spawnPoints;
             _dragInput = dragInput;
@@ -65,6 +73,7 @@ namespace CarPool.Level.Presenters
             _levelModel = new LevelModel(
                 _config,
                 _levelData,
+                _trackingCamera,
                 _levelProgress,
                 _spawnPoints,
                 _dragInput,
@@ -90,6 +99,8 @@ namespace CarPool.Level.Presenters
 
             _levelModel.OnWin += _levelView.OnWon;
             _levelModel.OnLose += _levelView.OnLost;
+            _levelModel.OnWin += () => OnLevelEnd?.Invoke();
+            _levelModel.OnLose += () => OnLevelEnd?.Invoke();
             _levelModel.OnSwipeCountChange += _levelView.OnSwipeCountChanged;
             _moneyModel.OnMoneyAmountChange += _levelView.OnMoneyAmountChanged;
             
@@ -106,12 +117,12 @@ namespace CarPool.Level.Presenters
 
         public void ReloadLevel()
         {
-            OnLevelEnd?.Invoke();
+            OnLevelLoad?.Invoke();
         }
 
         public void LoadNextLevel()
         {
-            OnLevelEnd?.Invoke();
+            OnLevelLoad?.Invoke();
         }
 
         public void Clear()

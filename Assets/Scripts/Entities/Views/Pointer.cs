@@ -5,8 +5,10 @@ namespace CarPool.Entities.Views
 {
     public class Pointer : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        
         private PointerVM _viewModel;
-        private Vector3 _defaultScale;
+        private Vector2 _defaultScale;
         
         public void Construct(PointerVM viewModel)
         {
@@ -19,7 +21,7 @@ namespace CarPool.Entities.Views
 
         private void Start()
         {
-            _defaultScale = transform.localScale;
+            _defaultScale = spriteRenderer.size;
             
             OnHidden();
         }
@@ -31,7 +33,9 @@ namespace CarPool.Entities.Views
 
         private void OnTransformed(float scale)
         {
-            transform.localScale = _defaultScale * scale;
+            var size = _defaultScale;
+            size.y += size.y * scale;
+            spriteRenderer.size = size;
         }
 
         private void OnHidden()

@@ -15,7 +15,7 @@ namespace CarPool.Entities.Views.Cars
         {
             _viewModel = viewModel;
 
-            _viewModel.OnForceAdd += OnForceAdded;
+            _viewModel.OnVelocityChange += OnVelocityChanged;
             _viewModel.OnRotate += OnRotated;
         }
 
@@ -32,9 +32,14 @@ namespace CarPool.Entities.Views.Cars
             }
         }
 
-        private void OnForceAdded(Vector3 force)
+        private void OnCollisionEnter(Collision collision)
         {
-            _rigidbody.AddForce(force);
+            _viewModel.OnCollisionEnter(collision);
+        }
+
+        private void OnVelocityChanged(Vector3 velocity)
+        {
+            _rigidbody.velocity = velocity;
         }
 
         private void OnRotated(Quaternion rotation)

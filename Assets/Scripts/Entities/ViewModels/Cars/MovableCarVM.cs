@@ -8,20 +8,25 @@ namespace CarPool.Entities.ViewModels.Cars
     {
         private readonly MovableCarModel _model;
 
-        public event Action<Vector3> OnForceAdd;
+        public event Action<Vector3> OnVelocityChange;
         public event Action<Quaternion> OnRotate;
 
         public MovableCarVM(MovableCarModel model)
         {
             _model = model;
 
-            _model.OnForceAdd += (force) => OnForceAdd?.Invoke(force);
+            _model.OnVelocityChange += (velocity) => OnVelocityChange?.Invoke(velocity);
             _model.OnRotate += (rotation) => OnRotate?.Invoke(rotation);
         }
 
         public void OnCarStop()
         {
             _model.OnCarStop();
+        }
+
+        public void OnCollisionEnter(Collision collision)
+        {
+            _model.OnCollisionEnter(collision);
         }
     }
 }
