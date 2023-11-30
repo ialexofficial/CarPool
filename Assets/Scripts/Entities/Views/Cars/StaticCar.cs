@@ -12,7 +12,7 @@ namespace CarPool.Entities.Views.Cars
         
         private void OnCollisionEnter(Collision collision)
         {
-            if (LayerMasker.CheckLayer(playerLayer, collision.gameObject.layer))
+            if (LayerUtils.CheckLayer(playerLayer, collision.gameObject.layer))
             {
                 OnDestroy?.Invoke();
             }

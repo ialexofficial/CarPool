@@ -54,7 +54,7 @@ namespace CarPool.Entities.Models.Cars
         public void OnCollisionEnter(Collision collision)
         {
             if (
-                !LayerMasker.CheckLayer(_settings.borderLayer, collision.gameObject.layer) ||
+                !LayerUtils.CheckLayer(_settings.borderLayer, collision.gameObject.layer) ||
                 _lastCollidedBorder == collision.gameObject ||
                 State is CarState.Stopped
             )

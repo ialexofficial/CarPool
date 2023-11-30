@@ -27,7 +27,7 @@ namespace CarPool.Entities.Views
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!LayerMasker.CheckLayer(interactableLayers, other.gameObject.layer))
+            if (!LayerUtils.CheckLayer(interactableLayers, other.gameObject.layer))
                 return;
 
             Explode();
@@ -36,7 +36,7 @@ namespace CarPool.Entities.Views
                 transform.position,
                 explosionRadius,
                 _overlappedColliders,
-                LayerMasker.MergeLayerMasks(interactableLayers, destroyableLayers)
+                interactableLayers.MergeLayerMasks(destroyableLayers)
             );
 
             for (int i = 0; i < length; ++i)
@@ -46,12 +46,12 @@ namespace CarPool.Entities.Views
                 if (collider == _collider)
                     continue;
 
-                if (LayerMasker.CheckLayer(destroyableLayers, collider.gameObject.layer))
+                if (LayerUtils.CheckLayer(destroyableLayers, collider.gameObject.layer))
                 {
                     collider.GetComponentInParent<IDestroyable>().Destroy();
                 }
 
-                if (LayerMasker.CheckLayer(interactableLayers, collider.gameObject.layer))
+                if (LayerUtils.CheckLayer(interactableLayers, collider.gameObject.layer))
                 {
                     collider.GetComponentInParent<Rigidbody>()?.AddExplosionForce(
                         explosionForce,

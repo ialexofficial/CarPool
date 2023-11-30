@@ -1,3 +1,3 @@
-[submodule "Assets/Ji2Core"]
-	path = Assets/Ji2Core
+[submodule "Assets/TemplateCore/Ji2Core"]
+	path = Assets/TemplateCore/Ji2Core
 	url = https://github.com/VadimCat/Ji2Core
