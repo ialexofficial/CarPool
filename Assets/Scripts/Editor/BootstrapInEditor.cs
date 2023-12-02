@@ -27,7 +27,7 @@ namespace CarPool.Editor
                             .GUIDToAssetPath(
                                 AssetDatabase.FindAssets("LevelDatabase", new []
                                 {
-                                    "Assets/Scenes"
+                                    "Assets/Configs"
                                 })[0]
                             )
                         ) as LevelDatabase;
