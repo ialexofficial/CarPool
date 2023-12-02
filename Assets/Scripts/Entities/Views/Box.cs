@@ -20,7 +20,7 @@ namespace CarPool.Entities.Views
         
         private void OnCollisionEnter(Collision collision)
         {
-            if (LayerUtils.CheckLayer(playerLayer, collision.gameObject.layer))
+            if (playerLayer.CheckLayer(collision.gameObject.layer))
             {
                 collision.gameObject.GetComponent<IDestroyable>().Destroy();
                 ((IDestroyable) this).Destroy();
