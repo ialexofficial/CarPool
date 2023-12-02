@@ -4,7 +4,7 @@ using UnityEngine;
 namespace CarPool.Entities.Views
 {
     [RequireComponent(typeof(Collider))]
-    public class Barrel : MonoBehaviour
+    public class Explosive : MonoBehaviour
     {
         [SerializeField] private LayerMask interactableLayers;
         [SerializeField] private LayerMask destroyableLayers;
@@ -12,6 +12,7 @@ namespace CarPool.Entities.Views
         [SerializeField] private float explosionForce;
         [SerializeField] private ParticleSystem explosionVFX;
         [SerializeField] private Collider[] parts;
+        [SerializeField] private GameObject[] disablingParts;
 
 #if UNITY_EDITOR
         [SerializeField] private bool drawGizmos;
@@ -65,6 +66,11 @@ namespace CarPool.Entities.Views
         private void Explode()
         {
             _collider.enabled = false;
+
+            foreach (var part in disablingParts)
+            {
+                part.SetActive(false);
+            }
             foreach (Collider part in parts)
             {
                 part.enabled = true;
