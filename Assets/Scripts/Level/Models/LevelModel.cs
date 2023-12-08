@@ -7,11 +7,13 @@ using CarPool.Entities.Views.Cars;
 using CarPool.Tools;
 using Client;
 using Ji2.CommonCore;
+using Ji2.CommonCore.SaveDataContainer;
+using Ji2.Models;
 using Ji2Core.Core.UserInput;
 
 namespace CarPool.Level.Models
 {
-    public class LevelModel
+    public class LevelModel : LevelBase<ProgressBase>
     {
         private readonly CarFactory carFactory;
         private readonly Finish _finish;
@@ -39,13 +41,14 @@ namespace CarPool.Level.Models
             LevelData levelData,
             TrackingCamera trackingCamera,
             LevelsLoopProgress levelProgress,
+            ISaveDataContainer saveDataContainer,
             SpawnPoint[] spawnPoints,
             DragInput dragInput,
             PositionedDragInput positionedDragInput,
             UpdateService updateService,
             Finish finish,
             StaticCar[] staticCars
-        )
+        ) : base(null, levelProgress.GetNextLevelData(), saveDataContainer)
         {
             carFactory = new CarFactory(
                 trackingCamera,

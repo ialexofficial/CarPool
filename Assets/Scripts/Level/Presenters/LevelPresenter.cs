@@ -8,6 +8,7 @@ using CarPool.Tools;
 using CarPool.UI.Views;
 using Client;
 using Ji2.CommonCore;
+using Ji2.CommonCore.SaveDataContainer;
 using Ji2Core.Core.Tools;
 using Ji2Core.Core.UserInput;
 
@@ -27,6 +28,7 @@ namespace CarPool.Level.Presenters
         private readonly PositionedDragInput _positionedDragInput;
         private readonly SpawnPoint[] _spawnPoints;
         private readonly TrackingCamera _trackingCamera;
+        private readonly ISaveDataContainer _saveDataContainer;
 
         private LevelModel _levelModel;
         private MoneyModel _moneyModel;
@@ -43,6 +45,7 @@ namespace CarPool.Level.Presenters
             TrackingCamera trackingCamera,
             LevelData levelData,
             LevelsLoopProgress levelProgress,
+            ISaveDataContainer saveDataContainer,
             SpawnPoint[] spawnPoints,
             DragInput dragInput,
             PositionedDragInput positionedDragInput,
@@ -63,6 +66,7 @@ namespace CarPool.Level.Presenters
             _finish = finish;
             _coins = coins;
             _moneyDataContainer = moneyDataContainer;
+            _saveDataContainer = saveDataContainer;
          
             _levelProgress = levelProgress;
             _staticCars = staticCars;
@@ -75,6 +79,7 @@ namespace CarPool.Level.Presenters
                 _levelData,
                 _trackingCamera,
                 _levelProgress,
+                _saveDataContainer,
                 _spawnPoints,
                 _dragInput,
                 _positionedDragInput,

@@ -35,8 +35,8 @@ namespace CarPool.Editor
                     PlayerPrefsSaveDataContainer dataContainer = new PlayerPrefsSaveDataContainer();
                     dataContainer.Load();
                     dataContainer.SaveValue("LastLevelNumber",
-                        levelDatabase.Levels
-                            .Select(data => data.name).ToList()
+                        levelDatabase.GetLevelsOrder()
+                            .ToList()
                             .IndexOf(SceneManager.GetActiveScene().name));
                     
                     SceneManager.LoadScene("Bootstrap");

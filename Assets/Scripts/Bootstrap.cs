@@ -41,6 +41,7 @@ namespace CarPool
 
             ISaveDataContainer saveDataContainer = InstallSaveDataContainer();
             InstallMoneyContainer(saveDataContainer);
+            levelDatabase.Bootstrap();
             InstallLevelProgressService(saveDataContainer);
             InstallScreenNavigator();
             CameraProvider cameraProvider = InstallCameraProvider();
@@ -79,7 +80,7 @@ namespace CarPool
         {
             _context.Register(new LevelsLoopProgress(
                 saveDataContainer,
-                levelDatabase.Levels.Select(levelData => levelData.name).ToArray()
+                levelDatabase.GetLevelsOrder()
             ));
         }
 

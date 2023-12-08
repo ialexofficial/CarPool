@@ -44,8 +44,7 @@ namespace CarPool.States
         {
             await _screenNavigator.PushScreen<LoadingScreen>();
 
-            LevelData rawData = _levelProgressService.GetNextLevelData();
-            ClearLevelData levelData = _levelDatabase.Levels.First(data => data.name == rawData.name);
+            ClearLevelData levelData = _levelDatabase.GetData(_levelProgressService.GetNextLevelData().name);
             await _sceneLoader.LoadScene(levelData.name);
 
             LevelPresenter levelPresenter = new LevelPresenter(
@@ -53,6 +52,7 @@ namespace CarPool.States
                 _context.GetService<TrackingCamera>(),
                 levelData,
                 _levelProgressService,
+                _saveDataContainer,
                 _context.GetService<SpawnPoint[]>(),
                 _context.GetService<DragInput>(),
                 _context.GetService<PositionedDragInput>(),
