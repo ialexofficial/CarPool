@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 315a5db6724d4d3c9fdd75428b14efa7, type: 3}
   m_Name: Level6
   m_EditorClassIdentifier: 
-  SwipeCount: 3
+  <Id>k__BackingField: Level6
+  <SwipeCount>k__BackingField: 4
